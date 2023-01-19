@@ -21,7 +21,8 @@
 .auth-container .btn {
   margin-top: 32px;
 }
-.auth-container input.input {
+
+input.input {
   padding: 12px;
   border-radius: 9px;
   border: 1px solid #2196f3;
@@ -31,7 +32,8 @@
   min-width: 300px;
   color: #2196f3;
 }
-.auth-container button.btn {
+
+button.btn {
   padding: 16px;
   border: 1px solid #2196f3;
   border-radius: 8px;
@@ -45,7 +47,7 @@
   font-weight: bold;
   outline: none;
 }
-.auth-container button.btn:hover {
+button.btn:hover {
   background: #1873bb;
   cursor: pointer;
 }/*# sourceMappingURL=Register.css.map */
