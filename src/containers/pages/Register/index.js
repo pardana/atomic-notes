@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Register.scss";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 class Register extends Component {
   state = {
@@ -14,8 +15,23 @@ class Register extends Component {
   };
 
   handleRegisterSubmit = () => {
-    console.log(this.state.email);
-    console.log(this.state.password);
+    const { email, password } = this.state;
+    console.log("data before:", email, password);
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((res) => {
+        // Signed in
+        // const user = userCredential.user;
+        console.log("success: ", res);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
   };
 
   render() {
