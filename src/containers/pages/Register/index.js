@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Register.scss";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import Button from "../../../components/atoms/Button";
+import { connect } from "react-redux";
+import { registerUserAPI } from "../../../config/redux/action";
 
 class Register extends Component {
   state = {
@@ -18,20 +20,7 @@ class Register extends Component {
     const { email, password } = this.state;
     console.log("data before:", email, password);
 
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        // Signed in
-        // const user = userCredential.user;
-        console.log("success: ", res);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ..
-      });
+    this.props.registerAPI({ email, password });
   };
 
   render() {
@@ -53,9 +42,11 @@ class Register extends Component {
             placeholder="Password"
             onChange={this.handleChangeText}
           />
-          <button className="btn" onClick={this.handleRegisterSubmit}>
-            Register
-          </button>
+          <Button
+            title="Register"
+            onClick={this.handleRegisterSubmit}
+            loading={this.props.isLoading}
+          />
         </div>
 
         {/* <button>Go to Dashboard</button> */}
@@ -64,4 +55,12 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const reduxState = (state) => ({
+  isLoading: state.isLoading,
+});
+
+const reduxDispatch = (dispatch) => ({
+  registerAPI: (data) => dispatch(registerUserAPI(data)),
+});
+
+export default connect(reduxState, reduxDispatch)(Register);
