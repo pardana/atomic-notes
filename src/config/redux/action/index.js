@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
+import { getDatabase, push, ref } from "firebase/database";
+
 export const actionUserName = () => (dispatch) => {
   setTimeout(() => {
     return dispatch({ type: "CHANGE_USER", value: "Pardana" });
@@ -66,5 +68,14 @@ export const loginUserAPI = (data) => (dispatch) => {
         reject(false);
         alert("Login Anda Gagal!");
       });
+  });
+};
+
+export const addDataToAPI = (data) => (dispatch) => {
+  const db = getDatabase();
+  push(ref(db, "notes/" + data.userId), {
+    title: data.title,
+    content: data.content,
+    date: data.date,
   });
 };

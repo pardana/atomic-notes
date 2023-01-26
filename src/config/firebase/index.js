@@ -10,6 +10,8 @@ const firebaseConfig = {
   messagingSenderId: "481828827512",
   appId: "1:481828827512:web:55b2794f228da17728988d",
   measurementId: "G-Q8E904NZ9P",
+  databaseURL:
+    "https://atomic-notes-993d8-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 
 // Initialize Firebase
