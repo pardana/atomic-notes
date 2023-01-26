@@ -30,20 +30,34 @@ export const registerUserAPI = (data) => (dispatch) => {
 };
 
 export const loginUserAPI = (data) => (dispatch) => {
-  dispatch({ type: "CHANGE_LOGIN", value: true });
+  return new Promise((resolved, reject) => {
+    dispatch({ type: "CHANGE_LOGIN", value: true });
 
-  const auth = getAuth();
-  return signInWithEmailAndPassword(auth, data.email, data.password)
-    .then((res) => {
-      // Signed in
-      console.log("success: ", res);
-      dispatch({ type: "CHANGE_LOADING", value: false });
-      alert("Login Anda Berhasil!");
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      dispatch({ type: "CHANGE_LOADING", value: false });
-    });
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((res) => {
+        // Signed in
+        console.log("success: ", res);
+
+        const dataUser = {
+          uid: res.user.uid,
+          email: res.user.email,
+          emailVerified: res.user.emailVerified,
+        };
+
+        dispatch({ type: "CHANGE_LOADING", value: false });
+        dispatch({ type: "CHANGE_ISLOGIN", value: true });
+        dispatch({ type: "CHANGE_USER", value: dataUser });
+        resolved(true);
+        alert("Login Anda Berhasil!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        dispatch({ type: "CHANGE_LOADING", value: false });
+        dispatch({ type: "CHANGE_ISLOGIN", value: false });
+        reject(false);
+      });
+  });
 };
