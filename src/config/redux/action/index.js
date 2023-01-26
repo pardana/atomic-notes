@@ -11,22 +11,27 @@ export const actionUserName = () => (dispatch) => {
 };
 
 export const registerUserAPI = (data) => (dispatch) => {
-  dispatch({ type: "CHANGE_LOADING", value: true });
+  return new Promise((resolved, reject) => {
+    dispatch({ type: "CHANGE_LOADING", value: true });
 
-  const auth = getAuth();
-  return createUserWithEmailAndPassword(auth, data.email, data.password)
-    .then((res) => {
-      // Signed in
-      console.log("success: ", res);
-      dispatch({ type: "CHANGE_LOADING", value: false });
-      alert("Register Anda Berhasil!");
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
-      dispatch({ type: "CHANGE_LOADING", value: false });
-    });
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((res) => {
+        // Signed in
+        console.log("success: ", res);
+        dispatch({ type: "CHANGE_LOADING", value: false });
+        resolved(true);
+        alert("Register Anda Berhasil!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        dispatch({ type: "CHANGE_LOADING", value: false });
+        reject(false);
+        alert("Register Anda Gagal!");
+      });
+  });
 };
 
 export const loginUserAPI = (data) => (dispatch) => {
@@ -50,6 +55,7 @@ export const loginUserAPI = (data) => (dispatch) => {
         dispatch({ type: "CHANGE_USER", value: dataUser });
         resolved(true);
         alert("Login Anda Berhasil!");
+        console.log("dataUser: ", dataUser);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -58,6 +64,7 @@ export const loginUserAPI = (data) => (dispatch) => {
         dispatch({ type: "CHANGE_LOADING", value: false });
         dispatch({ type: "CHANGE_ISLOGIN", value: false });
         reject(false);
+        alert("Login Anda Gagal!");
       });
   });
 };
