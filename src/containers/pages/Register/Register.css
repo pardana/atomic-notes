@@ -50,4 +50,11 @@ button.btn {
 button.btn:hover {
   background: #1873bb;
   cursor: pointer;
+}
+button.btn.disable {
+  background: gray;
+  border: 1px solid gray;
+}
+button.btn.disable:hover {
+  cursor: not-allowed;
 }/*# sourceMappingURL=Register.css.map */

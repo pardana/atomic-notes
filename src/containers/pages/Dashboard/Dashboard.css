@@ -1,1 +1,69 @@
-/*# sourceMappingURL=Dashboard.css.map */
+.container {
+  max-width: 900px;
+  display: block;
+  margin: auto;
+}
+.container .input-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.container .input-form .input-title {
+  width: 40%;
+  background: white;
+  border: 1px solid skyblue;
+  padding: 12px;
+  border-radius: 4px;
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  outline: none;
+}
+.container .input-form .input-content {
+  width: 40%;
+  border: 1px solid skyblue;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 12px;
+  min-height: 200px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: gray;
+  outline: none;
+}
+.container .input-form .save-btn {
+  padding: 12px 50px;
+  border-radius: 4px;
+  background: white;
+  border: 2px solid skyblue;
+  color: skyblue;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+}
+.container .card-content {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 16px;
+  box-shadow: 4px 3px 8px black;
+  margin-bottom: 16px;
+}
+.container .card-content p {
+  margin: 0px;
+}
+.container .card-content .title {
+  font-size: 24px;
+  font-weight: bold;
+}
+.container .card-content .date {
+  font-size: 12px;
+}
+.container .card-content .content {
+  margin-top: 20px;
+  font-size: 14px;
+}/*# sourceMappingURL=Dashboard.css.map */

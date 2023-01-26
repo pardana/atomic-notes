@@ -1,1 +1,60 @@
-/*# sourceMappingURL=Login.css.map */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+.auth-container .auth-card {
+  border: 1px solid #bfbfbf;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px 10px rgba(0, 0, 0, 0.25);
+}
+.auth-container p.auth-title {
+  margin: 0;
+  font-weight: bold;
+  font-size: 24px;
+  color: green;
+  margin-bottom: 16px;
+}
+.auth-container .btn {
+  margin-top: 32px;
+}
+
+input.input {
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid green;
+  outline: none;
+  display: block;
+  margin-bottom: 12px;
+  min-width: 300px;
+  color: green;
+}
+
+button.btn {
+  padding: 16px;
+  border: 1px solid green;
+  border-radius: 8px;
+  min-width: 200px;
+  background: green;
+  color: white;
+  display: block;
+  margin: 0 auto;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  outline: none;
+}
+button.btn:hover {
+  background: darkgreen;
+  cursor: pointer;
+}
+button.btn.disable {
+  background: gray;
+  border: 1px solid gray;
+}
+button.btn.disable:hover {
+  cursor: not-allowed;
+}/*# sourceMappingURL=Login.css.map */

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Login.scss";
 import { connect } from "react-redux";
 import { loginUserAPI } from "../../../config/redux/action";
 import Button from "../../../components/atoms/Button";
@@ -24,7 +25,7 @@ class Login extends Component {
       .catch((err) => err);
 
     if (res) {
-      console.log("login success");
+      console.log("login success : ", res);
       this.setState({
         email: "",
         password: "",
