@@ -62,18 +62,20 @@ class Dashboard extends Component {
 
         <hr />
 
-        <div className="card-content">
-          <p className="title">Title</p>
-          <p className="date">26 Jan 2023</p>
-          <p className="content">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </p>
-        </div>
+        {this.props.notes.length > 0 ? (
+          <>
+            {this.props.notes.map((note) => {
+              return (
+                <div className="card-content" key={note.id}>
+                  <p className="title">{note.data.title}</p>
+                  <p className="date">{note.data.date}</p>
+                  <p className="content">{note.data.content}</p>
+                  <hr />
+                </div>
+              );
+            })}
+          </>
+        ) : null}
       </div>
     );
   }
@@ -81,6 +83,7 @@ class Dashboard extends Component {
 
 const reduxState = (state) => ({
   userData: state.user,
+  notes: state.notes,
 });
 
 const reduxDispatch = (dispatch) => ({

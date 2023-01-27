@@ -83,9 +83,24 @@ export const addDataToAPI = (data) => (dispatch) => {
 export const getDataFromAPI = (data) => (dispatch) => {
   const db = getDatabase();
   const urlNotes = ref(db, "notes/" + data.uid);
-  onValue(urlNotes, (snapshot) => {
-    const value = snapshot.val();
-    // updateStarCount(postElement, data);
-    console.log("getNotes: ", value);
+
+  return new Promise((resolved, reject) => {
+    onValue(urlNotes, (snapshot) => {
+      const value = snapshot.val();
+      console.log("getNotes: ", value);
+
+      const data = [];
+      Object.keys(snapshot.val()).map((key) => {
+        data.push({
+          id: key,
+          data: snapshot.val()[key],
+        });
+      });
+
+      console.log("getDataArr: ", data);
+
+      dispatch({ type: "SET_NOTES", value: data });
+      resolved(snapshot.val());
+    });
   });
 };
