@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { getDatabase, push, ref } from "firebase/database";
+import { getDatabase, push, ref, onValue } from "firebase/database";
 
 export const actionUserName = () => (dispatch) => {
   setTimeout(() => {
@@ -77,5 +77,15 @@ export const addDataToAPI = (data) => (dispatch) => {
     title: data.title,
     content: data.content,
     date: data.date,
+  });
+};
+
+export const getDataFromAPI = (data) => (dispatch) => {
+  const db = getDatabase();
+  const urlNotes = ref(db, "notes/" + data.uid);
+  onValue(urlNotes, (snapshot) => {
+    const value = snapshot.val();
+    // updateStarCount(postElement, data);
+    console.log("getNotes: ", value);
   });
 };

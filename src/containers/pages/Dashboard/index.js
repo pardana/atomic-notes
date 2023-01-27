@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Dashboard.scss";
-import { addDataToAPI } from "../../../config/redux/action";
+import { addDataToAPI, getDataFromAPI } from "../../../config/redux/action";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {
@@ -11,23 +11,25 @@ class Dashboard extends Component {
   };
 
   componentDidMount() {
-    const userData = localStorage.getItem("userData");
-    console.log("dashboard: ", JSON.parse(userData));
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    this.props.getNotes(userData);
   }
 
   handleSaveNotes = () => {
     const { title, content } = this.state;
     const { saveNotes } = this.props;
+    const userData = JSON.parse(localStorage.getItem("userData"));
 
     const data = {
       title: title,
       content: content,
       date: new Date().getTime(),
-      userId: this.props.userData.uid,
+      userId: userData.uid,
     };
 
     saveNotes(data);
     console.log(data);
+    alert("Data Berhasil Disimpan!");
   };
 
   onInputChange = (e, type) => {
@@ -83,6 +85,7 @@ const reduxState = (state) => ({
 
 const reduxDispatch = (dispatch) => ({
   saveNotes: (data) => dispatch(addDataToAPI(data)),
+  getNotes: (data) => dispatch(getDataFromAPI(data)),
 });
 
 export default connect(reduxState, reduxDispatch)(Dashboard);
