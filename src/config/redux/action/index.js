@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { getDatabase, push, ref, onValue } from "firebase/database";
+import { getDatabase, push, ref, onValue, set } from "firebase/database";
 
 export const actionUserName = () => (dispatch) => {
   setTimeout(() => {
@@ -102,5 +102,23 @@ export const getDataFromAPI = (data) => (dispatch) => {
       dispatch({ type: "SET_NOTES", value: data });
       resolved(snapshot.val());
     });
+  });
+};
+
+export const updateDataFromAPI = (data) => (dispatch) => {
+  const db = getDatabase();
+
+  return new Promise((resolved, reject) => {
+    set(ref(db, `notes/${data.userId}/${data.noteId}`), {
+      title: data.title,
+      content: data.content,
+      date: data.date,
+    })
+      .then(() => {
+        resolved(true);
+      })
+      .catch((error) => {
+        reject(false);
+      });
   });
 };
