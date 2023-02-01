@@ -43,6 +43,15 @@
       font-weight: bold;
       text-transform: uppercase;
       outline: none;
+      &.cancel {
+        border: 2px solid orange;
+        color: orange;
+      }
+    }
+    .action-wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 40%;
     }
   }
 

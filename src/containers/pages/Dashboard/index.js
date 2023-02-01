@@ -47,6 +47,14 @@ class Dashboard extends Component {
     });
   };
 
+  cancelNotes = () => {
+    this.setState({
+      title: "",
+      content: "",
+      textButton: "SIMPAN",
+    });
+  };
+
   render() {
     const { title, content, date } = this.state;
     return (
@@ -64,9 +72,18 @@ class Dashboard extends Component {
             value={content}
             onChange={(e) => this.onInputChange(e, "content")}
           ></textarea>
-          <button className="save-btn" onClick={this.handleSaveNotes}>
-            {this.state.textButton}
-          </button>
+          <div className="action-wrapper">
+            {this.state.textButton === "UPDATE" ? (
+              <button className="save-btn cancel" onClick={this.cancelNotes}>
+                CANCEL
+              </button>
+            ) : (
+              <div />
+            )}
+            <button className="save-btn" onClick={this.handleSaveNotes}>
+              {this.state.textButton}
+            </button>
+          </div>
         </div>
 
         <hr />
