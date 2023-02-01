@@ -4,7 +4,14 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { getDatabase, push, ref, onValue, set } from "firebase/database";
+import {
+  getDatabase,
+  push,
+  ref,
+  onValue,
+  set,
+  remove,
+} from "firebase/database";
 
 export const actionUserName = () => (dispatch) => {
   setTimeout(() => {
@@ -120,5 +127,13 @@ export const updateDataFromAPI = (data) => (dispatch) => {
       .catch((error) => {
         reject(false);
       });
+  });
+};
+
+export const deleteDataFromAPI = (data) => (dispatch) => {
+  const db = getDatabase();
+
+  return new Promise((resolved, reject) => {
+    remove(ref(db, `notes/${data.userId}/${data.noteId}`));
   });
 };

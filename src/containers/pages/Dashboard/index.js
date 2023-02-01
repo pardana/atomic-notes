@@ -4,6 +4,7 @@ import {
   addDataToAPI,
   getDataFromAPI,
   updateDataFromAPI,
+  deleteDataFromAPI,
 } from "../../../config/redux/action";
 import { connect } from "react-redux";
 
@@ -68,6 +69,16 @@ class Dashboard extends Component {
     });
   };
 
+  deleteNote = (e, note) => {
+    e.stopPropagation();
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const data = {
+      userId: userData.uid,
+      noteId: note.id,
+    };
+    this.props.deleteNotes(data);
+  };
+
   render() {
     const { title, content, date } = this.state;
     return (
@@ -113,6 +124,12 @@ class Dashboard extends Component {
                   <p className="title">{note.data.title}</p>
                   <p className="date">{note.data.date}</p>
                   <p className="content">{note.data.content}</p>
+                  <div
+                    className="delete-btn"
+                    onClick={(e) => this.deleteNote(e, note)}
+                  >
+                    X
+                  </div>
                   <hr />
                 </div>
               );
@@ -133,6 +150,7 @@ const reduxDispatch = (dispatch) => ({
   saveNotes: (data) => dispatch(addDataToAPI(data)),
   getNotes: (data) => dispatch(getDataFromAPI(data)),
   updateNotes: (data) => dispatch(updateDataFromAPI(data)),
+  deleteNotes: (data) => dispatch(deleteDataFromAPI(data)),
 });
 
 export default connect(reduxState, reduxDispatch)(Dashboard);
