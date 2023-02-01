@@ -8,6 +8,7 @@ class Dashboard extends Component {
     title: "",
     content: "",
     date: "",
+    textButton: "SIMPAN",
   };
 
   componentDidMount() {
@@ -38,6 +39,14 @@ class Dashboard extends Component {
     });
   };
 
+  updateNotes = (note) => {
+    this.setState({
+      title: note.data.title,
+      content: note.data.content,
+      textButton: "UPDATE",
+    });
+  };
+
   render() {
     const { title, content, date } = this.state;
     return (
@@ -56,7 +65,7 @@ class Dashboard extends Component {
             onChange={(e) => this.onInputChange(e, "content")}
           ></textarea>
           <button className="save-btn" onClick={this.handleSaveNotes}>
-            Simpan
+            {this.state.textButton}
           </button>
         </div>
 
@@ -66,7 +75,11 @@ class Dashboard extends Component {
           <>
             {this.props.notes.map((note) => {
               return (
-                <div className="card-content" key={note.id}>
+                <div
+                  key={note.id}
+                  className="card-content"
+                  onClick={() => this.updateNotes(note)}
+                >
                   <p className="title">{note.data.title}</p>
                   <p className="date">{note.data.date}</p>
                   <p className="content">{note.data.content}</p>
